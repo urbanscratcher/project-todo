@@ -10,6 +10,8 @@ import Input from "./Input";
 function App() {
   const now = new Date();
   const dateStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+  const savedTodos = window.localStorage.getItem("todos");
+  const savedToday = savedTodos ? JSON.parse(savedTodos)[dateStr] : null;
 
   const [sums, setSums] = useState([]);
   const [todos, setTodos] = useState([]);
@@ -19,9 +21,6 @@ function App() {
   const summaryInputRef = useRef("");
 
   useEffect(() => {
-    const todos = window.localStorage.getItem("todos");
-    const savedToday = todos ? JSON.parse(todos)[dateStr] : null;
-
     if (savedToday) {
       setTodos(savedToday.todos);
       setSums(savedToday.sums);
@@ -42,6 +41,10 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    saveHandler();
+  }, [todos, sums]);
+
   const changeHandler = (e) => {
     setInput(e.target.value);
   };
@@ -53,7 +56,11 @@ function App() {
   const keyDownHandler = (e) => {
     if (e.nativeEvent.isComposing) return;
     if (e.key === "Enter" && input !== "") {
-      todos.push({ text: input, done: false, id: generateRandomString(3) });
+      setTodos((todos) => [
+        ...todos,
+        { text: input, done: false, id: generateRandomString(3) },
+      ]);
+
       setInput("");
     }
   };
@@ -74,7 +81,7 @@ function App() {
     setSums((sums) => sums.filter((_, i) => i !== idx));
   };
 
-  const saveHandler = (e) => {
+  const saveHandler = () => {
     const prevTodos = window.localStorage.getItem(dateStr);
     const obj = prevTodos ? { ...prevTodos } : {};
     obj[dateStr] = {
@@ -84,7 +91,7 @@ function App() {
 
     window.localStorage.setItem("todos", JSON.stringify(obj));
 
-    alert("saved to your local");
+    console.log("saved...");
   };
 
   return (
@@ -99,26 +106,13 @@ function App() {
         min-h-screen
         className="text-zinc-700"
       >
-        <div className="grid grid-cols-[auto_1fr_auto] items-end w-4xl">
+        <div className="grid grid-cols-[max-content_max-content] items-end gap-4">
           <h2 text-4xl>
             {formatDate(now)} ({formatDay(now, LANGUAGE.KOREAN)})
           </h2>
           {todos.length > 0 && todos.every((v) => v.done === true) && (
-            <p text-2xl ml-4>
-              Done!
-            </p>
+            <p text-2xl>Done!</p>
           )}
-          <div
-            onClick={saveHandler}
-            mb-1
-            justify-self-end
-            cursor-pointer
-            text-2xl
-            rounded-15
-            text-zinc-400
-            hover:text-zinc-600
-            className={`i-lucide:save`}
-          ></div>
         </div>
         <div flex flex-col gap-6>
           <Input
