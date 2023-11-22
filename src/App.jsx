@@ -1,11 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { generateRandomString } from "./helpers";
-import Input from "./Input";
 import format from "date-fns/format";
-import { ko } from "date-fns/locale";
+import { useEffect, useRef, useState } from "react";
+import Header, { HeaderContainer } from "./features/header/Header";
+import SummaryContainer from "./features/summaries/SummaryContainer";
+import SummaryInput from "./features/summaries/SummaryInput";
+import SummaryList from "./features/summaries/SummaryList";
+import TodoInput from "./features/todos/TodoInput";
+import TodoList from "./features/todos/TodoList";
+import TodoListContainer from "./features/todos/TodoListContainer";
+import { generateRandomString } from "./helpers";
+import AppContainer from "./ui/AppContainer";
 
 function App() {
-  console.log("App Rendering...");
+  console.log("[R] App");
+
   let now = new Date();
 
   const dateStr = format(now, "yyyy-MM-dd");
@@ -88,128 +95,43 @@ function App() {
     window.localStorage.setItem("todos", JSON.stringify(prevObj));
   };
 
+  const isDone = todos.length > 0 && todos.every((v) => v.done === true);
+
   return (
     <>
-      <div
-        w-4xl
-        mx-auto
-        pt-25
-        flex
-        flex-col
-        gap-12
-        min-h-screen
-        className="text-zinc-700"
-      >
-        <div className="grid grid-cols-[max-content_max-content] items-end gap-4">
-          <p text-4xl>{format(now, "yyyy. MM. dd. (ccc)", { locale: ko })}</p>
-          {todos.length > 0 && todos.every((v) => v.done === true) && (
-            <p text-2xl>Done!</p>
-          )}
-        </div>
-        <div flex flex-col gap-6>
-          <Input
+      <AppContainer>
+        <HeaderContainer>
+          <Header done={isDone} />
+        </HeaderContainer>
+        <TodoListContainer>
+          <TodoInput
             onFocusStyle={
               document.activeElement === inputRef.current &&
               "focus:border focus:border-gray-800 "
             }
-            iconStr="i-lucide:plus"
-            placeholder="Today I'll..."
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={keyDownHandler}
             inputValue={input}
             inputRef={inputRef}
           />
-          <ol text-3xl flex flex-col gap-5>
-            {todos.map((v, i) => (
-              <TodoListItem
-                key={v.id}
-                id={v.id}
-                idx={i}
-                updateTodos={onSetTodos}
-                todo={v}
-              />
-            ))}
-          </ol>
-        </div>
-        {todos.length > 0 && todos.every((v) => v.done === true) && (
+          <TodoList todos={todos} updateTodos={onSetTodos} />
+        </TodoListContainer>
+        {isDone && (
           <>
-            <div flex flex-col gap-6>
-              <Input
-                onFocusStyle={"focus:border focus:border-gray-800 "}
-                iconStr="i-lucide:plus"
-                placeholder="To wrap up, I did..."
+            <SummaryContainer>
+              <SummaryInput
                 onChange={(e) => setSummaryInput(e.target.value)}
                 onKeyDown={summaryKeyDownHandler}
                 inputValue={summaryInput}
                 inputRef={summaryInputRef}
               />
-              <ol text-3xl flex flex-col gap-5>
-                {sums.map((v, idx) => (
-                  <li key={v.id} id={v.id} flex justify-between px-10>
-                    <p flex gap-4>
-                      {`${idx + 1}. ${v.text}`}
-                    </p>
-                    <div
-                      className={`i-lucide:x hover:text-black`}
-                      cursor-pointer
-                      onClick={(e) => removeSumHandler(e, idx)}
-                    ></div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+              <SummaryList sums={sums} onClick={removeSumHandler} />
+            </SummaryContainer>
           </>
         )}
-      </div>
+      </AppContainer>
     </>
   );
 }
 
 export default App;
-
-export const TodoListItem = ({ id, updateTodos, idx, doneInit, todo }) => {
-  const [done, setDone] = useState(todo.done);
-
-  const deleteHandler = (e) => {
-    setDone((done) => !done);
-
-    updateTodos((todos) =>
-      todos.map((todo, i) => {
-        if (i === idx) {
-          todo.done = !done;
-        }
-        return todo;
-      })
-    );
-  };
-
-  const removeHandler = (e) => {
-    e.stopPropagation();
-    updateTodos((todos) => todos.filter((_, i) => i !== idx));
-  };
-
-  return (
-    <li key={id} flex justify-between px-10>
-      <p
-        onClick={(e) => deleteHandler(e)}
-        cursor-pointer
-        flex
-        gap-4
-        className={`${
-          done
-            ? "line-through text-gray-200 hover:brightness-90"
-            : "hover:text-black"
-        }`}
-      >
-        {`${idx + 1}. ${todo.text}`}
-      </p>
-      <div
-        className={`i-lucide:x ${
-          done ? "text-gray-200 hover:brightness-90" : "hover:text-black"
-        }`}
-        cursor-pointer
-        onClick={(e) => removeHandler(e)}
-      ></div>
-    </li>
-  );
-};
