@@ -1,7 +1,7 @@
-import { format } from "date-fns";
+import format from "date-fns/format";
 import { ko } from "date-fns/locale";
-import DoneMessage from "./DoneMessage";
 import { H2 } from "../../ui/Heading";
+import DoneMessage from "./DoneMessage";
 
 export function HeaderContainer({ children }) {
   console.log("[R] HeaderContainer");
