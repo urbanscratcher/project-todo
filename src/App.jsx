@@ -1,31 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  LANGUAGE,
-  formatDate,
-  formatDay,
-  generateRandomString,
-} from "./helpers";
+import { generateRandomString } from "./helpers";
 import Input from "./Input";
+import format from "date-fns/format";
+import { ko } from "date-fns/locale";
 
 function App() {
-  const now = new Date();
-  const dateStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+  console.log("App Rendering...");
+  let now = new Date();
+
+  const dateStr = format(now, "yyyy-MM-dd");
   const savedTodos = window.localStorage.getItem("todos");
   const savedToday = savedTodos ? JSON.parse(savedTodos)[dateStr] : null;
 
-  const [sums, setSums] = useState([]);
-  const [todos, setTodos] = useState([]);
+  const [sums, setSums] = useState(savedToday?.sums ?? []);
+  const [todos, setTodos] = useState(savedToday?.todos ?? []);
   const [input, setInput] = useState("");
-  const inputRef = useRef("");
   const [summaryInput, setSummaryInput] = useState("");
+  const inputRef = useRef("");
   const summaryInputRef = useRef("");
-
-  useEffect(() => {
-    if (savedToday) {
-      setTodos(savedToday.todos);
-      setSums(savedToday.sums);
-    }
-  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -42,6 +34,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("Saving...");
     saveHandler();
   }, [todos, sums]);
 
@@ -82,16 +75,17 @@ function App() {
   };
 
   const saveHandler = () => {
-    const prevTodos = window.localStorage.getItem(dateStr);
-    const obj = prevTodos ? { ...prevTodos } : {};
-    obj[dateStr] = {
+    const rawPrevTodos = window.localStorage.getItem("todos");
+    const prevTodos = rawPrevTodos ? JSON.parse(rawPrevTodos) : null;
+
+    const newObj = {};
+    newObj[dateStr] = {
       todos: todos,
       sums: sums,
     };
 
-    window.localStorage.setItem("todos", JSON.stringify(obj));
-
-    console.log("saved...");
+    const prevObj = prevTodos ? Object.assign(prevTodos, newObj) : newObj;
+    window.localStorage.setItem("todos", JSON.stringify(prevObj));
   };
 
   return (
@@ -107,9 +101,7 @@ function App() {
         className="text-zinc-700"
       >
         <div className="grid grid-cols-[max-content_max-content] items-end gap-4">
-          <h2 text-4xl>
-            {formatDate(now)} ({formatDay(now, LANGUAGE.KOREAN)})
-          </h2>
+          <p text-4xl>{format(now, "yyyy. MM. dd. (ccc)", { locale: ko })}</p>
           {todos.length > 0 && todos.every((v) => v.done === true) && (
             <p text-2xl>Done!</p>
           )}
