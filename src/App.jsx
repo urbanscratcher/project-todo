@@ -59,8 +59,8 @@ function App() {
     if (e.nativeEvent.isComposing) return;
     if (e.key === "Enter" && input !== "") {
       setTodos((todos) => [
-        ...todos,
         { text: input, done: false, id: generateRandomString(3) },
+        ...todos,
       ]);
 
       setInput("");
