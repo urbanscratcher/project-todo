@@ -2,6 +2,7 @@ import { useRef } from "react";
 import TodoListItem from "./TodoListItem";
 import { useState } from "react";
 import { useEffect } from "react";
+import TodoDone from "./TodoDone";
 
 function TodoList({ todos, updateTodos }) {
   console.log("[R] Todo List");
@@ -68,7 +69,6 @@ function TodoList({ todos, updateTodos }) {
             onSetDragOverItem={setDragOverItemHandler}
           />
         ))}
-      {isDone && <p>done list</p>}
     </ol>
   );
 }

@@ -8,11 +8,19 @@ function TodoInput({
   iconStr,
   placeholder,
   onFocusStyle,
+  doneTasks,
+  totalTasks,
 }) {
+  const isDone = totalTasks > 0 && doneTasks === totalTasks;
   return (
     <Input
-      iconStr="i-lucide:plus"
-      placeholder="Today I'll..."
+      size={isDone ? "md" : "lg"}
+      iconStr={isDone ? `i-lucide:chevron-down` : `i-lucide:plus`}
+      placeholder={
+        isDone
+          ? `All tasks are done (${totalTasks}/${totalTasks})`
+          : `Today I'll...`
+      }
       onFocusStyle={onFocusStyle}
       onChange={onChange}
       onKeyDown={onKeyDown}

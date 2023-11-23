@@ -1,5 +1,5 @@
 function DoneMessage() {
-  return <p className="text-2xl">Done!</p>;
+  return <div className="text-4xl text-zinc-500 i-lucide:check-check"></div>;
 }
 
 export default DoneMessage;

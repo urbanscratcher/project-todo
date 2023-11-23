@@ -14,7 +14,7 @@ const TodoListItem = ({
 }) => {
   // console.log("[R] Todo List Item: ", idx);
   const [done, setDone] = useState(todo.done);
-  const [showDelete, setShowDelete] = useState(false);
+  const [hovering, setHovering] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [dropped, setDropped] = useState(false);
 
@@ -39,11 +39,11 @@ const TodoListItem = ({
 
   // mouse hover
   const mouseEnterHandler = (e) => {
-    setShowDelete(true);
+    setHovering(true);
   };
 
   const mouseLeaveHandler = (e) => {
-    setShowDelete(false);
+    setHovering(false);
   };
 
   // drag & drop
@@ -88,6 +88,18 @@ const TodoListItem = ({
     setDropped(true);
   };
 
+  const editHandler = (e) => {
+    e.preventDefault();
+    // onUpdateList((todoList) =>
+    //   todoList.map((todo, i) => {
+    //     if (i === idx) {
+    //      // input text 받아서 처리
+    //     }
+    //     return todo;
+    //   })
+    // );
+  };
+
   return (
     <li
       key={id}
@@ -105,6 +117,15 @@ const TodoListItem = ({
         dragging && "bg-gray-50 text-transparent"
       }`}
     >
+      {/* {hovering && (
+        <div
+          className={`i-lucide:pencil ${
+            done ? "text-gray-200 hover:brightness-90" : "hover:text-gray-500"
+          }`}
+          cursor-pointer
+          onClick={(e) => editHandler(e)}
+        ></div>
+      )} */}
       <p
         onClick={(e) => deleteHandler(e)}
         cursor-pointer
@@ -119,7 +140,7 @@ const TodoListItem = ({
       >
         {`${olderIdx + 1}. ${todo.text}`}
       </p>
-      {showDelete && (
+      {hovering && (
         <div
           className={`i-lucide:x ${
             done ? "text-gray-200 hover:brightness-90" : "hover:text-black"

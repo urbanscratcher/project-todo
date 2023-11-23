@@ -4,6 +4,7 @@ import Header, { HeaderContainer } from "./features/header/Header";
 import SummaryContainer from "./features/summaries/SummaryContainer";
 import SummaryInput from "./features/summaries/SummaryInput";
 import SummaryList from "./features/summaries/SummaryList";
+import TodoDone from "./features/todos/TodoDone";
 import TodoInput from "./features/todos/TodoInput";
 import TodoList from "./features/todos/TodoList";
 import TodoListContainer from "./features/todos/TodoListContainer";
@@ -25,6 +26,7 @@ function App() {
   const [summaryInput, setSummaryInput] = useState("");
   const inputRef = useRef("");
   const summaryInputRef = useRef("");
+  const done = todos.length > 0 && todos.every((v) => v.done === true);
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -95,39 +97,37 @@ function App() {
     window.localStorage.setItem("todos", JSON.stringify(prevObj));
   };
 
-  const isDone = todos.length > 0 && todos.every((v) => v.done === true);
-
   return (
     <>
       <AppContainer>
         <HeaderContainer>
-          <Header done={isDone} />
+          <Header done={done} />
         </HeaderContainer>
         <TodoListContainer>
           <TodoInput
             onFocusStyle={
               document.activeElement === inputRef.current &&
-              "focus:border focus:border-gray-800 "
+              "focus:border focus:border-gray-800"
             }
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={keyDownHandler}
             inputValue={input}
             inputRef={inputRef}
+            doneTasks={todos.filter((v) => v.done === true).length}
+            totalTasks={todos.length}
           />
           <TodoList todos={todos} updateTodos={onSetTodos} />
         </TodoListContainer>
-        {isDone && (
-          <>
-            <SummaryContainer>
-              <SummaryInput
-                onChange={(e) => setSummaryInput(e.target.value)}
-                onKeyDown={summaryKeyDownHandler}
-                inputValue={summaryInput}
-                inputRef={summaryInputRef}
-              />
-              <SummaryList sums={sums} onClick={removeSumHandler} />
-            </SummaryContainer>
-          </>
+        {done && (
+          <SummaryContainer>
+            <SummaryInput
+              onChange={(e) => setSummaryInput(e.target.value)}
+              onKeyDown={summaryKeyDownHandler}
+              inputValue={summaryInput}
+              inputRef={summaryInputRef}
+            />
+            <SummaryList sums={sums} onClick={removeSumHandler} />
+          </SummaryContainer>
         )}
       </AppContainer>
     </>

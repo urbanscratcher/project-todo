@@ -7,7 +7,6 @@ function AppContainer({ children }) {
       pt-25
       flex
       flex-col
-      gap-12
       min-h-screen
     text-zinc-700"
     >
