@@ -101,23 +101,24 @@ const TodoListItem = ({
   };
 
   return (
-    <li
-      key={id}
-      onMouseEnter={mouseEnterHandler}
-      onMouseLeave={mouseLeaveHandler}
-      onDragStart={dragStartHandler}
-      onDragEnter={dragEnterHandler}
-      onDragEnd={dragEndHandler}
-      onDrop={dropHandler}
-      onDragOver={(e) => e.preventDefault()}
-      onDragLeave={(e) => e.preventDefault()}
-      onDrag={(e) => e.preventDefault()}
-      draggable
-      className={`flex justify-between items-center cursor-pointer gap-6 pl-9 pr-9 py-3 rounded-lg ${
-        dragging && "bg-gray-50 text-transparent"
-      }`}
-    >
-      {/* {hovering && (
+    <li>
+      <div
+        key={id}
+        onMouseEnter={mouseEnterHandler}
+        onMouseLeave={mouseLeaveHandler}
+        onDragStart={dragStartHandler}
+        onDragEnter={dragEnterHandler}
+        onDragEnd={dragEndHandler}
+        onDrop={dropHandler}
+        onDragOver={(e) => e.preventDefault()}
+        onDragLeave={(e) => e.preventDefault()}
+        onDrag={(e) => e.preventDefault()}
+        draggable
+        className={`flex justify-between items-center cursor-pointer gap-6 pl-9 pr-9 py-3 rounded-lg ${
+          dragging && "bg-gray-50 text-transparent"
+        }`}
+      >
+        {/* {hovering && (
         <div
           className={`i-lucide:pencil ${
             done ? "text-gray-200 hover:brightness-90" : "hover:text-gray-500"
@@ -126,29 +127,30 @@ const TodoListItem = ({
           onClick={(e) => editHandler(e)}
         ></div>
       )} */}
-      <p
-        onClick={(e) => deleteHandler(e)}
-        cursor-pointer
-        flex
-        gap-4
-        flex-1
-        className={`${
-          done
-            ? "line-through text-gray-200 hover:brightness-90"
-            : "hover:text-black"
-        }`}
-      >
-        {`${olderIdx + 1}. ${todo.text}`}
-      </p>
-      {hovering && (
-        <div
-          className={`i-lucide:x ${
-            done ? "text-gray-200 hover:brightness-90" : "hover:text-black"
-          }`}
+        <p
+          onClick={(e) => deleteHandler(e)}
           cursor-pointer
-          onClick={(e) => removeHandler(e)}
-        ></div>
-      )}
+          flex
+          gap-4
+          flex-1
+          className={`${
+            done
+              ? "line-through text-gray-200 hover:brightness-90"
+              : "hover:text-black"
+          }`}
+        >
+          {`${olderIdx + 1}. ${todo.text}`}
+        </p>
+        {hovering && (
+          <div
+            className={`i-lucide:x ${
+              done ? "text-gray-200 hover:brightness-90" : "hover:text-black"
+            }`}
+            cursor-pointer
+            onClick={(e) => removeHandler(e)}
+          ></div>
+        )}
+      </div>
     </li>
   );
 };
