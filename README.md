@@ -4,16 +4,16 @@
 - Created using UnoCSS for personal use and as a practice project
 - My morning routine involves writing down three important tasks, and in the evening, I briefly reflect on them. I made this because I haven't been using my notebook lately. The data is stored in localStorage, but it would be nice to integrate it with Notion or Google Calendar in the future.
 
-# Features
+# 기능
 
-- Auto-focus on input when Enter is pressed
-- Delete option appears when hovering
-- List items can be dragged and dropped
-  - If an item is dragged out of the drop zone, the original list is shown
-- Retrospective section appears when all tasks are marked as done
-- Saved and loaded from localStorage
+- Enter를 누르면 인풋에 자동 포커싱
+- Hovering 시 delete 가능
+- 리스트 드래그 앤 드롭 가능
+  - 드롭 영역에서 벗어날 시 원래 리스트가 보여짐
+- 모두 done인 경우 회고란이 나타남
+- localStorage 저장 & 로드
 
-## Demo Video
+## 데모 영상
 
 [Nov-19-2023 11-50-07.webm](https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0)
 
