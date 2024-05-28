@@ -4,7 +4,7 @@
 - Created using UnoCSS for personal use and as a practice project
 - My morning routine involves writing down three important tasks, and in the evening, I briefly reflect on them. I made this because I haven't been using my notebook lately. The data is stored in localStorage, but it would be nice to integrate it with Notion or Google Calendar in the future.
 
-# Features
+## Features
 
 - Auto-focus on input when Enter is pressed
 - Delete option appears when hovering
