@@ -1,61 +1,83 @@
-# Du it
+### Du it
 
-- Simple to-do list creation with retrospective capabilities
-- Created using UnoCSS for personal use and as a practice project
-- My morning routine involves writing down three important tasks, and in the evening, I briefly reflect on them. I made this because I haven't been using my notebook lately. The data is stored in localStorage, but it would be nice to integrate it with Notion or Google Calendar in the future.
+November 2023
+
+With an intuitive UI, you can create and review your to-do lists. This project was inspired by my personal morning routine of listing three important tasks and reflecting on them briefly in the evening. I found it difficult to maintain a diary, so I created this application as a practice.
 
 ## Features
 
-- **Auto-Focusing Input**: Automatically focuses the input field when the Enter key is pressed, streamlining the process of adding new items.
-- **Hover Delete Option**: Displays a delete button when hovering over an item, allowing for easy removal of items from the list.
-- **Drag and Drop Reordering**: Enables users to rearrange list items through drag and drop. If an item is dragged outside the designated drop zone, it returns to its original position.
-- **Retrospective Section**: When all items are marked as done, a retrospective section appears, enabling users to review completed tasks.
-- **Persistent Data**: Utilizes localStorage to save and load list data, ensuring that users' progress is maintained across sessions.
+- **Auto Focusing**: The input field is automatically focused when the Enter key is pressed.
+- **Delete To-Do**: A delete button appears when hovering over an item, allowing for easy deletion.
+- **Drag and Drop Items**: To-do items can be reordered via drag and drop. If an item is dragged out of the drop zone, it returns to its original position.
+- **Retrospective Section**: A retrospective section appears when all tasks are completed, allowing you to write brief reflections. Items in the retrospective can be listed by pressing the Enter key.
+- **Delete Retrospective Items**: Retrospective items can be deleted.
+- **Auto Date Transition**: The date automatically advances to the next day after 24 hours.
+- **Data Storage and Load**: The list data is saved to `localStorage` and loaded when the page is reopened.
 
-## Snapshots
+## Technical Focus
 
-[Nov-19-2023 11-50-07.webm](https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0)
+- Implemented the drag and drop feature for the list without using any libraries.
+- Chose `UnoCSS` over `TailwindCSS` for a new utility-first CSS framework, leveraging its extensibility, readability, and custom features.
+- Utilized the popular date formatting library `date-fns`.
+
+## Demo
+
+<video src="https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0"></video>
 
 ## Tech Stack
 
 1. Frontend
 
-- **Framework:** React + JavaScript + Vite
-- **Styling:** UnoCSS
-- **Utility:** date-fns
+- **Framework**: React
+- **Language**: JavaScript
+- **Bundler**: Vite
+- **Styling**: UnoCSS, Iconify
+- **Utilities**: date-fns
+- **Storage**: localStorage
 
-2. Backend
-3. Database
-4. Development Tools and Environment
-5. Cloud Services and Infra
+2. Backend X
+3. Database X
+
+4. Development Environment
+
+- **Source Code**: GitHub
+- **Build Tools**:
+
+5. Cloud Services and Deployment
+
+- **Hosting and Deployment**: Vercel
+
+---
 
 ## Next
 
-## To be added
-
-- Inline editing feature
-- Refactor input
-- Refactor list
-- Display data from previous days
-- Add animation effects
-- Nested structure
-- Drop down events
+- Currently, data is stored in `localStorage`. It would be beneficial to integrate with Notion or Google Calendar in the future.
+- Enable editing when clicking outside the text area of an item.
+- Refactor `Input` and `List` components.
+- Display data from previous dates.
+- Add animation effects.
+- Allow sub-tasks to be entered via the Tab key (using tree structures or recursive functions).
+- Make completed lists collapsible.
 
 ## Development Notes
 
-- UnoCSS
-  - While learning about CSS compilation/bundling, I came across UnoCSS and decided to apply it. It took quite a while to set up.
-  - Using attributify was somewhat unstable, with IntelliSense working intermittently.
-  - I discovered FontShare and iconify, which are excellent.
-  - UnoCSS is more flexible than Tailwind, making it suitable for large projects with a design system. Its ability to extend naming rules using regex is a significant advantage.
-  - As the ecosystem matures, its potential will grow, but the official documentation and setup details are currently a bit lacking.
-  - Overall, it seems to be more suitable for advanced users familiar with Tailwind or other presets.
-- date-fns
-  - Although I have been using the native Intl, I decided to become familiar with a date library, so I chose date-fns.
-  - Among the mentioned moment alternatives (dayjs, date-fns, luxon), benchmarks suggest this library is the most flexible and performant.
-  - It is well modularized and has a small package size, making it favorable for bundling.
-  - However, running a bundle analyzer or checking the network tab reveals that its size can still be significant.
-  - This project considers future calendar functionality, but for simple date calculations, custom functions might be more efficient.
-- Drag and Drop
-  - I studied drag events to implement this feature without a library.
-  - Styling was quite challenging and unclear, so I need to study more.
+- **UnoCSS**
+
+  - I learned about `UnoCSS` while researching CSS compilation/bundling and decided to apply it. It took a considerable amount of time to configure.
+  - Using `attributify` caused IntelliSense to be unreliable, so I ended up reporting this issue.
+  - Discovered other useful services like `FontShare` and `iconify`.
+  - `UnoCSS` seems to be more flexible than `TailwindCSS`, making it more suitable for large projects with established design systems. The ability to extend naming rules with regular expressions is a significant advantage.
+  - While promising, the ecosystem still feels somewhat immature, with official documentation and configuration details lacking.
+  - It seems to be favored by those skilled with `TailwindCSS` or other preset libraries for more complex functionalities.
+
+- **date-fns**
+
+  - Although I was using native `Intl`, I decided to familiarize myself with a date library, and chose `date-fns`.
+  - After researching alternatives like `dayjs`, `luxon`, and `moment`, I found `date-fns` to be the most flexible and performant.
+  - It's well-modularized and has a small package size, which is advantageous for bundling.
+  - However, running a bundling analyzer or checking the network tab revealed a significant size impact.
+  - For this project, using a library was necessary due to the potential for a calendar feature. However, for simpler date calculations, custom functions might be more efficient.
+
+- **Drag and Drop Feature**
+  - Studied the `drag` event to implement the feature without a library.
+  - Styling was particularly challenging, requiring further study.
