@@ -42,6 +42,7 @@ With an intuitive UI, you can create and review your to-do lists. This project w
 
 - **Source Code**: GitHub
 - **Build Tools**: Vite
+- **Package Manager:** pnpm
 
 ### Cloud Services and Deployment
 
