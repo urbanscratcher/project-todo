@@ -26,24 +26,24 @@ With an intuitive UI, you can create and review your to-do lists. This project w
 
 ## Tech Stack
 
-1. Frontend
+### Frontend
 
 - **Framework**: React
 - **Language**: JavaScript
-- **Bundler**: Vite
 - **Styling**: UnoCSS, Iconify
 - **Utilities**: date-fns
 - **Storage**: localStorage
 
-2. Backend X
-3. Database X
+### Backend X
 
-4. Development Environment
+### Database X
+
+### Development Environment
 
 - **Source Code**: GitHub
-- **Build Tools**:
+- **Build Tools**: Vite
 
-5. Cloud Services and Deployment
+### Cloud Services and Deployment
 
 - **Hosting and Deployment**: Vercel
 
