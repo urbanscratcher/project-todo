@@ -22,7 +22,10 @@
 
 ## Demo
 
-[Demo_Video]("https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0")
+<video width="600" controls>
+  <source src="https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0" type="video/webm">
+  Your browser does not support the video tag.
+</video>
 
 ## Tech Stack
 
