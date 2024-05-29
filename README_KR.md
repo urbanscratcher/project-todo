@@ -24,6 +24,11 @@
 
 [Vid](https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0)
 
+<video width="600" controls>
+  <source src="https://github.com/urbanscratcher/project-todo/assets/17016494/0d359602-89e7-4ce7-be75-59b6978c2ba0" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
 ## Tech Stack
 
 ### 프론트엔드
@@ -47,6 +52,10 @@
 ### 클라우드 서비스 및 배포
 
 - **호스팅 및 배포:** Vercel
+
+```cpp
+#include <iostream>
+```
 
 ---
 
