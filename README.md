@@ -6,12 +6,11 @@
 
 ## Features
 
-- Auto-focus on input when Enter is pressed
-- Delete option appears when hovering
-- List items can be dragged and dropped
-  - If an item is dragged out of the drop zone, the original list is shown
-- Retrospective section appears when all tasks are marked as done
-- Saved and loaded from localStorage
+- **Auto-Focusing Input**: Automatically focuses the input field when the Enter key is pressed, streamlining the process of adding new items.
+- **Hover Delete Option**: Displays a delete button when hovering over an item, allowing for easy removal of items from the list.
+- **Drag and Drop Reordering**: Enables users to rearrange list items through drag and drop. If an item is dragged outside the designated drop zone, it returns to its original position.
+- **Retrospective Section**: When all items are marked as done, a retrospective section appears, enabling users to review completed tasks.
+- **Persistent Data**: Utilizes localStorage to save and load list data, ensuring that users' progress is maintained across sessions.
 
 ## Snapshots
 
@@ -19,9 +18,18 @@
 
 ## Tech Stack
 
-- React + JavaScript + Vite
-- date-fns
-- UnoCSS
+1. Frontend
+
+- **Framework:** React + JavaScript + Vite
+- **Styling:** UnoCSS
+- **Utility:** date-fns
+
+2. Backend
+3. Database
+4. Development Tools and Environment
+5. Cloud Services and Infra
+
+## Next
 
 ## To be added
 
