@@ -49,7 +49,7 @@ With an intuitive UI, you can create and review your to-do lists. This project w
 
 ### Cloud Services and Deployment
 
-- **Hosting and Deployment**: Vercel
+- **Hosting and Deployment**: Netlify
 
 ---
 
