@@ -1,6 +1,6 @@
 # Du it
 
-November 2023
+May 2023, November 2023 (2 months)
 
 With an intuitive UI, you can create and review your to-do lists. This project was inspired by my personal morning routine of listing three important tasks and reflecting on them briefly in the evening. I found it difficult to maintain a diary, so I created this application as a practice.
 
